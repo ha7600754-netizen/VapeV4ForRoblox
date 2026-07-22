@@ -16634,3 +16634,26 @@ run(function()
         end
     })
 end)
+
+vape.Categories.Combat:CreateModule({local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+
+local function setupCharacter(character)
+	local humanoid = character:WaitForChild("Humanoid")
+
+	UserInputService.JumpRequest:Connect(function()
+		if humanoid and humanoid.Parent then
+			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		end
+	end)
+end
+
+if player.Character then
+	setupCharacter(player.Character)
+end
+
+player.CharacterAdded:Connect(setupCharacter)
+end
+
