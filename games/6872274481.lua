@@ -763,3 +763,5 @@ BedESP = vape.Categories.Render:CreateModule({
 	end,
 	Tooltip = 'Render Beds through walls'
 })
+
+		LazerGodmode = vape.Categories.Blatant:CreateModule({Name = 'LazerGodmode'})
