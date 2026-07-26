@@ -764,46 +764,5 @@ BedESP = vape.Categories.Render:CreateModule({
 	Tooltip = 'Render Beds through walls'
 })
 
-run(function()
-	local UserInputService = game:GetService('UserInputService')
-	local RunService = game:GetService('RunService')
-	local Players = game:GetService('Players')
-	local lplr = Players.LocalPlayer
 
-	local InfiniteJump
-
-	InfiniteJump = vape.Categories.Blatant:CreateModule({
-		Name = 'InfiniteJump',
-		Function = function(callback)
-			if callback then
-				local active = false
-				local inputConn, stepConn
-
-				inputConn = UserInputService.InputBegan:Connect(function(input, gameProcessed)
-					if gameProcessed then return end
-					if input.KeyCode == Enum.KeyCode.Space then
-						active = not active
-						if vape and vape.CreateNotification then
-							vape:CreateNotification('InfiniteJump', 'Infinite Jump: ' .. (active and 'ON' or 'OFF'), 3)
-						end
-					end
-				end)
-
-				stepConn = RunService.PreSimulation:Connect(function()
-					if not active then return end
-					local char = lplr and lplr.Character
-					if not char then return end
-					local hum = char:FindFirstChildOfClass('Humanoid')
-					if hum and hum.Health > 0 then
-						hum:ChangeState(Enum.HumanoidStateType.Jumping)
-					end
-				end)
-
-				InfiniteJump:Clean(inputConn)
-				InfiniteJump:Clean(stepConn)
-			end
-		end,
-		Tooltip = 'Enable the module, then press Space to toggle continuous jumping while airborne.'
-	})
-end)
 			
